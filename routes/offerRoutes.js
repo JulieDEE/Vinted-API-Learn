@@ -82,7 +82,7 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/offers", async (req, res) => {
+router.get("/", async (req, res) => {
   let perPage = 3;
   const filters = {};
 
@@ -115,5 +115,4 @@ router.get("/offers", async (req, res) => {
 
 module.exports = router;
 
-//     product_name: new RegExp("chemise", "i"),
-//   })
+
