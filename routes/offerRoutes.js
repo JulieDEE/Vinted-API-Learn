@@ -83,6 +83,11 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  const allOffers = await Offer.find();
+  res.json(allOffers);
+});
+
+router.get("/offers", async (req, res) => {
   let perPage = 20;
   const filters = {};
 
@@ -114,5 +119,3 @@ router.get("/", async (req, res) => {
 });
 
 module.exports = router;
-
-
