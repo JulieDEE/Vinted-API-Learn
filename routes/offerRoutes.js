@@ -87,6 +87,11 @@ router.get("/", async (req, res) => {
   res.json(allOffers);
 });
 
+router.get("/product", async (req, res) => {
+  const offerById = await Offer.findById(req.params);
+  res.json(offerById);
+});
+
 router.get("/offers", async (req, res) => {
   let perPage = 20;
   const filters = {};
