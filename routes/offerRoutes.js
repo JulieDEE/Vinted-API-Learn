@@ -83,7 +83,7 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  let perPage = 3;
+  let perPage = 20;
   const filters = {};
 
   if (req.query.title) {
