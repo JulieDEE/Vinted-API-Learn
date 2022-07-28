@@ -88,9 +88,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/product/:id", async (req, res) => {
-  const offerById = await Offer.findById(req.params.id);
+  const offerById = await Offer.findById(req.params.id).populate({
+    path: "owner",
+    select: "account.username account.phone account.avatar",
+  });
   res.json(offerById);
-  
 });
 
 router.get("/offers", async (req, res) => {
