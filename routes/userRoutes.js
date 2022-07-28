@@ -24,8 +24,10 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
       return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
     };
 
-    const myPictureInBase64 = convertToBase64(req.files.picture);
-    const pictureUpload = await cloudinary.uploader.upload(myPictureInBase64);
+    if (req.files) {
+      const myPictureInBase64 = convertToBase64(req.files.picture);
+      const pictureUpload = await cloudinary.uploader.upload(myPictureInBase64);
+    }
 
     if (!req.body.username) {
       res.json("Erreur : le nom de l'utilisateur n'est pas renseigné");
@@ -33,7 +35,6 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
       const newUser = new User({
         account: {
           username: req.body.username,
-          avatar: pictureUpload,
         },
         email: req.body.email,
         newsletter: req.body.newsletter,
@@ -41,6 +42,9 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
         hash: hash,
         token: token,
       });
+      if (req.files) {
+        newUser.account.avatar = pictureUpload;
+      }
 
       await newUser.save();
 
@@ -49,11 +53,13 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
         username: req.body.username,
         token: token,
       });
+      console.log(req.body);
     } else {
       res.json("Erreur : un utilisateur correspond déjà à cet email ! ");
     }
   } catch (error) {
     res.status(400).json(error.message);
+    console.log(req.body);
   }
 });
 
