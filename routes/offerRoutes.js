@@ -117,7 +117,7 @@ router.get("/offers", async (req, res) => {
 
   const offers = await Offer.find(filters)
     .sort({ product_price: req.query.sort })
-    .select("product_name product_price _id")
+    .select("product_name product_price _id product_details product_image")
     .limit(perPage)
     .skip(perPage * req.query.page);
 

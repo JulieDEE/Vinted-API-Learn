@@ -64,6 +64,9 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
 });
 
 router.post("/user/login", async (req, res) => {
+
+  console.log(req.body)
+
   const user = await User.findOne({ email: req.body.email });
   const salt = user.salt;
   const token = user.token;
@@ -77,7 +80,7 @@ router.post("/user/login", async (req, res) => {
       username: user.username,
     });
   } else {
-    res.json("Erreur : Le mot de passe est erroné !");
+    res.status(400).json("Erreur : Le mot de passe est erroné !");
   }
 });
 
