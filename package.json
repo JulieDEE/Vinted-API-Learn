@@ -21,6 +21,7 @@
     "express-fileupload": "^1.4.0",
     "mongoose": "^6.4.2",
     "sha256": "^0.2.0",
+    "stripe": "^9.16.0",
     "uid2": "^1.0.0"
   }
 }
