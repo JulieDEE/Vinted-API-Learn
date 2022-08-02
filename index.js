@@ -11,8 +11,10 @@ mongoose.connect(process.env.DATABASE);
 
 const offerRoutes = require("./routes/offerRoutes");
 const userRoutes = require("./routes/userRoutes");
+const paymentRoutes = require("./routes/paymentRoutes")
 app.use(offerRoutes);
 app.use(userRoutes);
+app.use(paymentRoutes); 
 
 app.all("*", async (req, res) => {
   res.status(404).send("Oups, page introuvable !");
